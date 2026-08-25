@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use client"; // ブラウザ側で動かすならこれを付ける
 import { useState } from "react";
 
 export default function Home() {
 
-  const [omikuji, setOmikuji] = useState<string | null>(null);
-  const [omikujiID, setOmikujiID] = useState<string | null>(null);
+  // ======================================
+  // ここで State を作る
+  // ======================================
+
+  // ======================================
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -14,45 +19,27 @@ export default function Home() {
           おみくじアプリ
         </h1>
 
-        <p>
-          {
-            omikuji === null ?
-              "おみくじを引いてください" :
-              "あなたの運勢は " + omikuji + " です (ID: " + omikujiID + ")"
-          }
-        </p>
+        {/* ======================================
+          ここに結果表示を作る
+        ====================================== */}
+
+        {/* ====================================== */}
 
         <button
-          onClick={() => fetch("/api/omikuji").then(res => res.json()).then(data => {
-            setOmikuji(data.omikuji);
-            setOmikujiID(data.omikujiID);
-          })}
+          onClick={() => {
+
+            // ======================================
+            // ここでおみくじを引くロジックを作る
+            // ======================================
+
+            // ======================================
+
+          }}
         >
           おみくじを引く
         </button>
 
-        <form action={async (formData: FormData) => {
-          const user_id = formData.get("user_id");
-          const rival_id = formData.get("rival_id");
-          if (!user_id || !rival_id) {
-            alert("おみくじが引かれていないか、rival_id が設定されていません。");
-            return;
-          }
-          
-          const { userOmikuji, rivalOmikuji, result }
-            = await fetch(`/api/battle?user_id=${encodeURIComponent(user_id as string)}&rival_id=${encodeURIComponent(rival_id as string)}`)
-              .then(data => data.json());
-
-          alert(`${result}！！\nあなた：${userOmikuji}\nライバル：${rivalOmikuji}`);
-
-        }}>
-
-          <input type="hidden" name="user_id" value={omikujiID || ""} />
-          <input type="text" placeholder="rival_id" name="rival_id" />
-
-        </form>
-
       </main>
-    </div >
+    </div>
   );
 }

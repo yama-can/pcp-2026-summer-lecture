@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { omikujiHistory } from "@/lib/memory";
 import { omikujiIndex } from "@/lib/omikuji";
 import { NextRequest, NextResponse } from "next/server";
@@ -13,8 +15,14 @@ export function GET(req: NextRequest) {
 
 	}
 
-	const userOmikuji = omikujiHistory.get(userId);
-	const rivalOmikuji = omikujiHistory.get(rivalId);
+	// ======================================
+	// omikujiHistory からユーザーのおみくじを取得するコードを書く
+	// ======================================
+
+	const userOmikuji = "";
+	const rivalOmikuji = "";
+
+	// ======================================
 
 	if(!userOmikuji || !rivalOmikuji) {
 
