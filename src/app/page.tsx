@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function Home() {
 
   const [omikuji, setOmikuji] = useState<string | null>(null);
+  const [omikujiID, setOmikujiID] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -17,12 +18,15 @@ export default function Home() {
           {
             omikuji === null ?
               "おみくじを引いてください" :
-              "あなたの運勢は " + omikuji
+              "あなたの運勢は " + omikuji + " です (ID: " + omikujiID + ")"
           }
         </p>
 
         <button
-          onClick={() => fetch("/api/omikuji").then(res => res.json()).then(data => setOmikuji(data.omikuji))}
+          onClick={() => fetch("/api/omikuji").then(res => res.json()).then(data => {
+            setOmikuji(data.omikuji);
+            setOmikujiID(data.omikujiID);
+          })}
         >
           おみくじを引く
         </button>

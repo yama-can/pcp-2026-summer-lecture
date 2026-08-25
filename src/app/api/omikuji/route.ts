@@ -1,4 +1,6 @@
+import { omikujiHistory } from "@/lib/memory";
 import { NextResponse } from "next/server";
+import { randomUUID } from "node:crypto";
 
 const OMIKUJI_TYPES = [
 	"大吉",
@@ -17,6 +19,11 @@ function randomOmikuji() {
 
 export function GET() {
 
-	return NextResponse.json({ omikuji: randomOmikuji() });
+	const omikujiID = randomUUID();
+	const omikujiResult = randomOmikuji();
+
+	omikujiHistory.set(omikujiID, omikujiResult);
+
+	return NextResponse.json({ omikuji: omikujiResult, omikujiID });
 
 }
