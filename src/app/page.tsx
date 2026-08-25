@@ -31,6 +31,13 @@ export default function Home() {
           おみくじを引く
         </button>
 
+        <form action="/api/battle" method="get">
+
+          <input type="hidden" name="user_id" value={omikujiID || ""} />
+          <input type="text" placeholder="rival_id" name="rival_id" />
+
+        </form>
+
       </main>
     </div>
   );
