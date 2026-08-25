@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  font-size: 36pt;
+  font-weight: bold;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button {
+  padding: 12px 6px;
+  color: white;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0051a3;
+}
