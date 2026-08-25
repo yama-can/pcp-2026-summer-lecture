@@ -31,7 +31,21 @@ export default function Home() {
           おみくじを引く
         </button>
 
-        <form action="/api/battle" method="get">
+        <form action={async (formData: FormData) => {
+          const user_id = formData.get("user_id");
+          const rival_id = formData.get("rival_id");
+          if (!user_id || !rival_id) {
+            alert("おみくじが引かれていないか、rival_id が設定されていません。");
+            return;
+          }
+          
+          const { userOmikuji, rivalOmikuji, result }
+            = await fetch(`/api/battle?user_id=${encodeURIComponent(user_id as string)}&rival_id=${encodeURIComponent(rival_id as string)}`)
+              .then(data => data.json());
+
+          alert(`${result}！！\nあなた：${userOmikuji}\nライバル：${rivalOmikuji}`);
+
+        }}>
 
           <input type="hidden" name="user_id" value={omikujiID || ""} />
           <input type="text" placeholder="rival_id" name="rival_id" />
@@ -39,6 +53,6 @@ export default function Home() {
         </form>
 
       </main>
-    </div>
+    </div >
   );
 }
